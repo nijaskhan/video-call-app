@@ -11,6 +11,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
+        // origin: 'https://localhost:3000',
         origin: 'https://video-call-reactapp.vercel.app',
         methods: ['GET', 'POST']
     }
