@@ -3,7 +3,8 @@ import './App.css';
 import Peer from 'simple-peer';
 import { io } from 'socket.io-client';
 
-const socket = io.connect('http://localhost:9999');
+// const socket = io.connect('http://localhost:9999');
+const socket = io.connect('https://video-call-app-1t6q.onrender.com');
 
 function App() {
   const [me, setMe] = useState("");
