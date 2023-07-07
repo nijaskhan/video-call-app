@@ -1,18 +1,15 @@
 const express = require ('express');
 const app = express();
-const cors = require('cors');
 const http = require('http');
 const {Server} = require('socket.io');
 const PORT = 9999;
-
-app.use(cors());
 
 const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
         // origin: 'https://localhost:3000',
-        origin: 'https://video-call-app-nijaskhan.vercel.app/',
+        origin: 'https://video-call-app-git-master-nijaskhan.vercel.app',
         methods: ['GET', 'POST']
     }
 });
