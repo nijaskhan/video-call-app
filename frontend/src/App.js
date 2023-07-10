@@ -133,6 +133,9 @@ function App() {
           <label htmlFor="idToCall">idToCall </label>
           <input id='idToCall' type="text" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} />
         </div>
+        <div>
+          <p>My_id : {me}</p>
+        </div>
 
         <div>
           {
