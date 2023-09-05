@@ -3,8 +3,7 @@ import './App.css';
 import Peer from 'simple-peer';
 import { io } from 'socket.io-client';
 
-// const socket = io.connect('http://localhost:9999');
-const socket = io.connect('https://video-call-app-1t6q.onrender.com');
+const socket = io.connect('http://localhost:9999');
 
 function App() {
   const [me, setMe] = useState("");
@@ -58,6 +57,10 @@ function App() {
       stream: stream
     });
 
+    /* the "signal" event is triggered during the negotiation 
+    process of establishing a WebRTC connection. It contains 
+    critical information (ICE candidates and possibly SDP) that is 
+    exchanged between peers to set up the connection successfully. */
     peer.on("signal", (data) => {
       socket.emit("call_user", {
         userToCall: id,
@@ -67,6 +70,11 @@ function App() {
       });
     });
 
+    /* the "stream" event is triggered when the 
+    peer object receives a video or audio stream 
+    from the remote peer. This event occurs as part of the 
+    WebRTC peer connection process when the remote peer begins 
+    sending its media stream. */
     peer.on("stream", (stream) => {
       userVideo.current.srcObject = stream
     });
@@ -91,9 +99,9 @@ function App() {
       socket.emit("answer_call", { signal: data, to: caller });
     });
 
-    peer.on("stream", (stream) => {
-      userVideo.current.srcObject = stream
-    });
+    // peer.on("stream", (stream) => {
+    //   userVideo.current.srcObject = stream
+    // });
 
     peer.signal(callerSignal);
     connectionRef.current = peer;
@@ -111,10 +119,8 @@ function App() {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{marginRight: '2rem'}}>
-          
+        <div style={{marginRight: '2rem'}}>         
             <video playsInline muted ref={myVideo} autoPlay style={{ width: '300px' }} />
-          
         </div>
         <div style={{marginLeft: '2rem'}}>
           {

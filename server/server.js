@@ -8,8 +8,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        // origin: 'https://localhost:3000',
-        origin: 'https://video-call-app-git-master-nijaskhan.vercel.app',
+        origin: 'http://localhost:3000',
         methods: ['GET', 'POST']
     }
 });
@@ -22,7 +21,7 @@ io.on('connection', (socket)=>{
 
     socket.on('disconnect', ()=>{
         socket.broadcast.emit("call_ended");
-    })
+    });
 
     socket.on('call_user', (data)=>{
         console.log(`received data on call user: ${data}`);
